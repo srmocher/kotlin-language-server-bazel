@@ -1,5 +1,6 @@
 # TODO
-
+- Add robust tests for Bazel features
+-
 ## Bugs
 
 ## Features
