@@ -7,7 +7,7 @@ NOTE: This rips out Gradle/Maven support that exists in the upstream fork to sup
 
 ![Icon](Icon128.png)
 
-Currently only [VSCode](https://github.com/fwcd/vscode-kotlin) is supported.
+Currently only [VSCode](https://github.com/srmocher/vscode-bazel-kotlin) is supported.
 
 ## Features
 - Autocompletion
