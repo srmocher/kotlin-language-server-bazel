@@ -111,7 +111,7 @@ class KotlinTextDocumentService(
             LOG.info("Hovering at {}", describePosition(position))
 
             val (file, cursor) = recover(position, Recompile.NEVER) ?: return@compute null
-            hoverAt(file, cursor) ?: noResult("No hover found at ${describePosition(position)}", null)
+            hoverAt(file, cp.compiler, cp, cursor) ?: noResult("No hover found at ${describePosition(position)}", null)
         }
     }
 
@@ -123,6 +123,7 @@ class KotlinTextDocumentService(
     override fun onTypeFormatting(params: DocumentOnTypeFormattingParams): CompletableFuture<List<TextEdit>> {
         TODO("not implemented")
     }
+
 
     override fun definition(position: DefinitionParams): CompletableFuture<Either<List<Location>, List<LocationLink>>> = async.compute {
         reportTime {
@@ -183,8 +184,16 @@ class KotlinTextDocumentService(
 
     override fun didOpen(params: DidOpenTextDocumentParams) {
         val uri = parseURI(params.textDocument.uri)
+        LOG.info { "Linting $uri" }
         sf.open(uri, params.textDocument.text, params.textDocument.version)
         lintNow(uri)
+
+        // notify client that linting or compiling was done
+        val documentNotification = mapOf("uri" to uri, "kind" to "end")
+        val params = ProgressParams()
+        params.token = Either.forLeft("srmocher/kotlinAnalysis")
+        params.value = Either.forRight(documentNotification)
+        client.notifyProgress(params)
     }
 
     override fun didSave(params: DidSaveTextDocumentParams) {

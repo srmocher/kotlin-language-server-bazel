@@ -1,0 +1,17 @@
+module(name = "kotlin-language-server-bazel")
+
+bazel_dep(name = "rules_jvm_external", version = "6.7")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # This line is an example coordinate, you'd copy-paste your actual dependencies here
+        # from your build.gradle or pom.xml file.
+        "org.ow2.asm:asm:9.7",
+        "com.google.code.gson:gson:2.12.0",
+    ],
+    lock_file = "//:maven_install.json",
+)
+use_repo(maven, "maven")
+
+bazel_dep(name = "rules_kotlin", version = "1.9.6")
