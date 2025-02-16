@@ -1,4 +1,4 @@
-load("@rules_kotlin//kotlin/internal:defs.bzl", "KtJvmInfo")
+load("@io_bazel_rules_kotlin//kotlin/internal:defs.bzl", "KtJvmInfo")
 
 KotlinLspInfo = provider(
     doc = "Contains the information leveraged by Kotlin Language Server for a target.",
