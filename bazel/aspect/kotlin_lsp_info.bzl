@@ -134,7 +134,7 @@ kotlin_lsp_aspect = aspect(
     ],
     attrs = {
         "_source_metadata_extractor": attr.label(
-            default = Label("//bazel/kotlin_lsp:source-metadata-extractor"),
+            default = Label("//bazel/aspect/kotlin_lsp:source-metadata-extractor"),
             executable = True,
             cfg = "exec",
         ),
