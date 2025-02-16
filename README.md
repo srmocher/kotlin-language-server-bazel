@@ -16,6 +16,11 @@ Currently only [VSCode](https://github.com/srmocher/vscode-bazel-kotlin) is supp
 
 This implementation aims to provide high performance by only indexing a small subset of source files tracked by Bazel and compute source code metadata during a build.
 
+## TODO
+- Write more unit-tests for the Bazel specific features
+- Add support for generating snippets inline (override members)
+
+
 ## Authors
 * [srmocher](https://github.com/srmocher)
 
